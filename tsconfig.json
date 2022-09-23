@@ -10,19 +10,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "allowSyntheticDefaultImports": true,
+    "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+      "@/*": ["src/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -32,6 +28,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "./tsconfig.node.json"

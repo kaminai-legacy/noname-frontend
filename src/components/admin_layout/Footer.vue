@@ -9,19 +9,13 @@
     <hr />
     <section class="socials">
       <address class="social-link">
-        <a href="#" title="Facebook"
-          ><font-awesome-icon icon="fa-brands fa-facebook-f"
-        /></a>
+        <a href="#" title="Facebook"><font-awesome-icon icon="fa-brands fa-facebook-f" /></a>
       </address>
       <address class="social-link">
-        <a href="#" title="Twitter"
-          ><font-awesome-icon icon="fa-brands fa-twitter"
-        /></a>
+        <a href="#" title="Twitter"><font-awesome-icon icon="fa-brands fa-twitter" /></a>
       </address>
       <address class="social-link">
-        <a href="#" title="Youtube"
-          ><font-awesome-icon icon="fa-brands fa-youtube"
-        /></a>
+        <a href="#" title="Youtube"><font-awesome-icon icon="fa-brands fa-youtube" /></a>
       </address>
     </section>
     <small class="text-reduced">© Copyright All rights reserved</small>
@@ -29,11 +23,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, inject } from 'vue';
+import { defineComponent, inject, reactive } from 'vue'
 
 interface Book {
-  title: string;
-  year?: number;
+  title: string
+  year?: number
 }
 
 export default defineComponent({
@@ -42,21 +36,21 @@ export default defineComponent({
     message: String,
   },
   setup(props) {
-    const axios: any = inject('axios'); // inject axios
-    console.log(props.message); // <-- type: string
-    const book: Book = reactive({ title: 'Vue 3 Guide' });
+    const axios: any = inject('axios') // inject axios
+    console.log(props.message) // <-- type: string
+    const book: Book = reactive({ title: 'Vue 3 Guide' })
 
     const getList = (): void => {
       axios.get('').then((response: { data: any }) => {
-        console.log(response.data);
-      });
-    };
+        console.log(response.data)
+      })
+    }
 
-    getList();
+    getList()
 
-    return { getList };
+    return { getList }
   },
-});
+})
 </script>
 
 <style scoped lang="scss">

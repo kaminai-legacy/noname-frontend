@@ -1,21 +1,21 @@
-import './bootstrap';
+import './bootstrap'
+import '@/assets/css/app.css'
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import VueAxios from 'vue-axios'
 
-import VueAxios from 'vue-axios';
-import axios from '@/axios';
-import '@/assets/css/app.css'
+import axios from '@/axios'
+import FontAwesomeIcon from '@/components/font_awesome'
+import router from '@/router'
+import store from "@/store";
+
 import App from './App.vue'
-import FontAwesomeIcon from '@/components/font_awesome';
-import router from '@/router';
 
-const app = createApp(App);
-const pinia = createPinia();
+const app = createApp(App)
 
-app.use(pinia);
-app.use(router);
-app.use(VueAxios, axios);
-app.provide('axios', app.config.globalProperties.axios);
-app.component('font-awesome-icon', FontAwesomeIcon);
-app.mount('#app');
+app.use(store)
+app.use(router)
+app.use(VueAxios, axios)
+app.provide('axios', app.config.globalProperties.axios)
+app.component('FontAwesomeIcon', FontAwesomeIcon)
+app.mount('#app')

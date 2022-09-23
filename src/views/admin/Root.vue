@@ -2,8 +2,10 @@
   <section class="page-wrapper">
     <header-main>
       <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/admin">Dashboard</router-link> |
+        <router-link to="/">Home</router-link>
+        |
+        <router-link to="/admin">Dashboard</router-link>
+        |
         <router-link to="/admin/users">Users</router-link>
       </nav>
     </header-main>
@@ -16,13 +18,13 @@
 
 <script lang="ts">
 export default {
-  name: "Root",
-};
+  name: 'Root',
+}
 </script>
 
 <script setup lang="ts">
-import Footer from '@/components/admin_layout/Footer.vue';
-import Header from '@/components/admin_layout/Header.vue';
+import Footer from '@/components/admin_layout/Footer.vue'
+import Header from '@/components/admin_layout/Header.vue'
 </script>
 
 <!-- <script lang="ts">

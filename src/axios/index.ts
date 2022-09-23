@@ -1,19 +1,23 @@
-import axios from 'axios';
+import axios from 'axios'
+
+import config from './config'
 import {
-  requestInterceptor, requestInterceptorCatch, responseInterceptor, responseInterceptorCatch,
-} from './interceptors';
-import config from './config';
+  requestInterceptor,
+  requestInterceptorCatch,
+  responseInterceptor,
+  responseInterceptorCatch,
+} from './interceptors'
 
 // Set config defaults when creating the instance
-const instance = axios.create(config);
+const instance = axios.create(config)
 
 // Alter defaults after instance has been created
 // instance.defaults.headers.common['Authorization'] = '';
 
-console.log({ ...instance });
-console.log(instance.getUri());
+console.log({ ...instance })
+console.log(instance.getUri())
 
-instance.interceptors.request.use(requestInterceptor, requestInterceptorCatch);
-instance.interceptors.response.use(responseInterceptor, responseInterceptorCatch);
+instance.interceptors.request.use(requestInterceptor, requestInterceptorCatch)
+instance.interceptors.response.use(responseInterceptor, responseInterceptorCatch)
 
-export default instance;
+export default instance

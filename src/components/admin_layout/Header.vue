@@ -13,6 +13,6 @@ export default class Header extends Vue {}
 
 <script lang="ts">
 export default {
-  name: "Header",
-};
+  name: 'Header',
+}
 </script>

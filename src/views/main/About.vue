@@ -5,22 +5,22 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: "UpdatePassword",
-  };
-  </script>
+export default {
+  name: 'UpdatePassword',
+}
+</script>
 
-  <script setup lang="ts">
-    import { onMounted } from "vue";
-  import { storeToRefs } from "pinia";
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
-  import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth'
 
-  const store = useAuthStore();
-  const { authUser } = storeToRefs(store);
+const store = useAuthStore()
+const { authUser } = storeToRefs(store)
 
-  onMounted(()=>{
-    console.log('onMounted')
-    console.log(store)
-  })
-  </script>
+onMounted(() => {
+  console.log('onMounted')
+  console.log(store)
+})
+</script>
