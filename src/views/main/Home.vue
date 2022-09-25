@@ -35,11 +35,3 @@ export default {
   name: "Home",
 };
 </script>
-
-<script setup lang="ts">
-import { onCreated } from "vue";
-
-onCreated(() => {
-  console.log("hiwtf");
-});
-</script>

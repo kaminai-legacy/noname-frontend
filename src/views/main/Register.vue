@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import RegisterForm from "@/components/common/RegisterForm.vue";
+import RegisterForm from "@/components/main_layout/RegisterForm.vue";
 
 export default {
   name: "RegisterView",

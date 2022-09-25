@@ -10,14 +10,20 @@
 </template>
 
 <script lang="ts">
-import LogoutIcon from "@/components/common/icons/LogoutIcon.vue";
-export default {
-  components: { LogoutIcon },
-  name: "Logout",
-  methods: {
-    logout() {
-      this.$store.dispatch("auth/logout");
-    },
-  },
-};
-</script>
+  export default {
+    name: "Logout",
+  };
+  </script>
+
+  <script setup lang="ts">
+
+  import { useAuthStore } from "@/store/auth";
+
+  import LogoutIcon from "@/components/common/icons/LogoutIcon.vue";
+
+  const store = useAuthStore()
+
+  const logout = () => {
+    store.logout();
+  }
+  </script>

@@ -2,7 +2,7 @@
   <footer>
     <section class="footer-content">
       <figure class="logo">
-        <img src="@/assets/logo.png" alt="logo" />
+        <img src="@/assets/vue.svg" alt="logo" />
         <figcaption>slogan</figcaption>
       </figure>
     </section>

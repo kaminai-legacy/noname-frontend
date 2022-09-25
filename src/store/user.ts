@@ -1,13 +1,16 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 
 import UserService from '@/services/UserService'
 import { getError } from '@/utils/helpers'
 
+import { Meta, Links } from '@/ts/interfaces/pagination_interfaces'
+import { Users } from '@/ts/types/store_types'
+
 export const useUserStore = defineStore('user', () => {
-  const users = ref([])
-  const meta = ref(null)
-  const links = ref(null)
+  const users: Ref<Users> = ref([])
+  const meta: Ref<Meta | null> = ref(null)
+  const links: Ref<Links> = ref({} as Links)
   const loading = ref(false)
   const error = ref(null)
 
@@ -18,15 +21,15 @@ export const useUserStore = defineStore('user', () => {
     loading.value = false
   }
 
-  function getUsers(page) {
+  function getUsers(page): Promise<any> {
     loading.value = true
-    UserService.getUsers(page)
+    return UserService.getUsers(page)
       .then((response) => {
         setPaginatedUsers(response)
       })
-      .catch((error) => {
+      .catch((catchError) => {
         loading.value = false
-        error.value = getError(error)
+        error.value = getError(catchError)
       })
   }
 
@@ -36,9 +39,9 @@ export const useUserStore = defineStore('user', () => {
       .then((response) => {
         setPaginatedUsers(response)
       })
-      .catch((error) => {
+      .catch((catchError) => {
         loading.value = false
-        error.value = getError(error)
+        error.value = getError(catchError)
       })
   }
 

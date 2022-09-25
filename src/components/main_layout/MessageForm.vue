@@ -1,12 +1,6 @@
 <template>
   <form @submit.prevent="postMessage">
-    <BaseInput
-      type="message"
-      label="Message"
-      name="message"
-      v-model="body"
-      class="mb-4"
-    />
+    <BaseInput type="message" label="Message" name="message" v-model="body" class="mb-4" />
     <div class="flex justify-end mb-2">
       <BaseBtn type="submit" text="Message" />
     </div>
@@ -15,37 +9,37 @@
 </template>
 
 <script lang="ts">
-import { getError } from "@/utils/helpers";
-import BaseBtn from "@/components/BaseBtn.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import FlashMessage from "@/components/FlashMessage.vue";
-
 export default {
   name: "MessageForm",
-  components: {
-    BaseBtn,
-    BaseInput,
-    FlashMessage,
-  },
-  data() {
-    return {
-      body: null,
-      error: null,
-    };
-  },
-  methods: {
-    async postMessage() {
-      try {
-        const payload = {
-          body: this.body,
-        };
-        this.error = null;
-        await this.$store.dispatch("message/postMessage", payload);
-        this.body = null;
-      } catch (error) {
-        this.error = getError(error);
-      }
-    },
-  },
 };
+</script>
+
+<script setup lang="ts">
+import { ref } from "vue";
+
+import { useMessageStore } from "@/store/message";
+
+import BaseBtn from "@/components/main_layout/BaseBtn.vue";
+import BaseInput from "@/components/main_layout/BaseInput.vue";
+import FlashMessage from "@/components/main_layout/FlashMessage.vue";
+
+import { getError } from "@/utils/helpers";
+
+const store = useMessageStore();
+
+const body = ref(null)
+const error = ref(null)
+
+const postMessage = async () => {
+  try {
+    const payload = {
+      body: body.value,
+    };
+    error.value = null;
+    await store.postMessage(payload);
+    body.value = null;
+  } catch (catchError) {
+    error.value = getError(catchError);
+  }
+}
 </script>

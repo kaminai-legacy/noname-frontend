@@ -14,15 +14,3 @@ export default {
 <script setup lang="ts">
 import HelloWorld from '@/components/common/HelloWorld.vue' // @ is an alias to /src
 </script>
-
-<!-- <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/common/HelloWorld.vue'; // @ is an alias to /src
-
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class VueExample extends Vue {}
-</script> -->

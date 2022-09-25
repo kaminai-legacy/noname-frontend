@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth', () => {
   const loading = ref(false)
   const error = ref(null)
 
-  const authUser = computed(() => user)
+  const authUser = computed(() => user.value)
   const isAdmin = computed(() => (user.value ? user.value.isAdmin : false))
   const loggedIn = computed(() => !!user.value)
   const guest = computed(() => {
@@ -27,8 +27,8 @@ export const useAuthStore = defineStore('auth', () => {
         setGuest({ value: 'isGuest' })
         if (router.currentRoute.value.name !== 'login') router.push({ path: '/login' })
       })
-      .catch((error) => {
-        error.value = getError(error)
+      .catch((catchError) => {
+        error.value = getError(catchError)
       })
   }
 

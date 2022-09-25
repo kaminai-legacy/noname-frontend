@@ -1,24 +1,11 @@
 <template>
   <div>
     <transition name="fade" mode="out-in">
-      <FlashMessage
-        message="loading..."
-        v-if="loading && !messages.length"
-        key="loading"
-      />
+      <FlashMessage message="loading..." v-if="loading && !messages.length" key="loading" />
       <ul v-else>
-        <li
-          v-for="message in messages"
-          :key="message.id"
-          class="flex py-2 space-x-2 border-b"
-        >
+        <li v-for="message in messages" :key="message.id" class="flex py-2 space-x-2 border-b">
           <div>
-            <img
-              v-if="message.user.avatar"
-              :src="message.user.avatar"
-              class="w-10 h-10 rounded-full"
-              alt=""
-            />
+            <img v-if="message.user.avatar" :src="message.user.avatar" class="w-10 h-10 rounded-full" alt="" />
             <AvatarIcon class="w-10 h-10 text-gray-400 rounded-full" v-else />
           </div>
           <div>
@@ -35,58 +22,30 @@
       <FlashMessage :error="error" v-if="error" key="error" />
     </transition>
     <transition name="fade">
-      <BasePagination
-        :meta="meta"
-        :links="links"
-        action="message/paginateMessages"
-        v-if="meta && meta.last_page > 1"
-      />
+      <BasePagination :meta="meta" :links="links" :store="store" action="paginateMessages"
+        v-if="meta && parseInt(meta.last_page) > 1" />
     </transition>
   </div>
 </template>
 
-<!-- <script>
-import { mapGetters } from "vuex";
-import FlashMessage from "@/components/FlashMessage.vue";
-import AvatarIcon from "@/components/common/icons/AvatarIcon.vue";
-import BasePagination from "@/components/BasePagination.vue";
-
-export default {
-  name: "Messages",
-  components: { FlashMessage, BasePagination, AvatarIcon },
-  //   computed: {
-  //     ...mapGetters("message", ["loading", "error", "messages", "meta", "links"]),
-  //   },
-  created() {
-    const currentPage = 1;
-    this.$store.dispatch("message/getMessages", currentPage);
-  },
-};
-</script> -->
-
 <script lang="ts">
 export default {
   name: "Messages",
-  //   inheritAttrs: false,
-  //   customOptions: {}
 };
 </script>
 
 <script setup lang="ts">
-import { onCreated } from "vue";
 import { storeToRefs } from "pinia";
 
 import { useMessageStore } from "@/store/message";
 
-import FlashMessage from "@/components/FlashMessage.vue";
+import FlashMessage from "@/components/main_layout/FlashMessage.vue";
 import AvatarIcon from "@/components/common/icons/AvatarIcon.vue";
-import BasePagination from "@/components/BasePagination.vue";
+import BasePagination from "@/components/main_layout/BasePagination.vue";
 
 const store = useMessageStore();
 const { messages, meta, links, loading, error } = storeToRefs(store);
 
-onCreated(() => {
-  const currentPage = 1;
-  store.getMessages(currentPage);
-});
+const currentPage = 1;
+store.getMessages(currentPage);
 </script>

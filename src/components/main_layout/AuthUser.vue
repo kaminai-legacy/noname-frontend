@@ -19,21 +19,6 @@
   </div>
 </template>
 
-<!-- <script>
-import { mapGetters } from "vuex";
-import VerifyEmail from "@/components/VerifyEmail.vue";
-
-export default {
-  name: "AuthUser",
-  components: {
-    VerifyEmail,
-  },
-  computed: {
-    ...mapGetters("auth", ["authUser"]),
-  },
-};
-</script> -->
-
 <script lang="ts">
 export default {
   name: "AuthUser",
@@ -45,7 +30,7 @@ import { storeToRefs } from "pinia";
 
 import { useAuthStore } from "@/store/auth";
 
-import VerifyEmail from "@/components/VerifyEmail.vue";
+import VerifyEmail from "@/components/main_layout/VerifyEmail.vue";
 
 const store = useAuthStore();
 const { authUser } = storeToRefs(store);

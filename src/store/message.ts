@@ -1,30 +1,23 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 
 import MessageService from '@/services/MessageService'
 import { getError } from '@/utils/helpers'
 
+import { Meta, Links } from '@/ts/interfaces/pagination_interfaces'
+import { Messages } from '@/ts/types/store_types'
+
 export const useMessageStore = defineStore('message', () => {
-  const messages = ref([])
-  const meta = ref(null)
-  const links = ref(null)
+  const messages: Ref<Messages> = ref([])
+  const meta: Ref<Meta | null> = ref(null)
+  const links: Ref<Links> = ref({} as Links)
   const loading = ref(false)
   const error = ref(null)
 
-  // const messages = computed(() => messages)
-  // const meta = computed(() => meta)
-  // const links = computed(() => links)
-  // const loading = computed(() => loading)
-  // const error = computed(() => error)
-
   function setPaginatedMessages(response) {
-    // commit("SET_MESSAGES", response.data.data);
     messages.value = response.data.data
-    // commit("SET_META", response.data.meta);
     meta.value = response.data.meta
-    // commit("SET_LINKS", response.data.links);
     links.value = response.data.links
-    // commit("SET_LOADING", false);
     loading.value = false
   }
 
@@ -34,9 +27,9 @@ export const useMessageStore = defineStore('message', () => {
       .then((response) => {
         setPaginatedMessages(response)
       })
-      .catch((error) => {
+      .catch((catchError) => {
         loading.value = false
-        error.value = getError(error)
+        error.value = getError(catchError)
       })
   }
 
@@ -52,9 +45,9 @@ export const useMessageStore = defineStore('message', () => {
       .then((response) => {
         setPaginatedMessages(response)
       })
-      .catch((error) => {
+      .catch((catchError) => {
         loading.value = false
-        error.value = getError(error)
+        error.value = getError(catchError)
       })
   }
 

@@ -1,76 +1,54 @@
 <template>
   <form @submit.prevent="registerUser">
-    <BaseInput
-      type="text"
-      label="Name"
-      name="name"
-      v-model="name"
-      placeholder="Luke Skywalker"
-      class="mb-2"
-    />
-    <BaseInput
-      type="email"
-      label="Email"
-      name="email"
-      v-model="email"
-      placeholder="luke@jedi.com"
-      class="mb-2"
-    />
-    <BaseInput
-      type="password"
-      label="Password"
-      name="password"
-      v-model="password"
-      class="mb-2"
-    />
-    <BaseInput
-      type="password"
-      label="Confirm Password"
-      name="password-confirm"
-      v-model="passwordConfirm"
-      class="mb-4"
-    />
+    <BaseInput type="text" label="Name" name="name" v-model="fields.name" placeholder="Luke" class="mb-2" />
+    <BaseInput type="email" label="Email" name="email" v-model="fields.email" placeholder="luke@jedi.com"
+      class="mb-2" />
+    <BaseInput type="password" label="Password" name="password" v-model="fields.password" class="mb-2" />
+    <BaseInput type="password" label="Confirm Password" name="password-confirm" v-model="fields.passwordConfirm"
+      class="mb-4" />
     <BaseBtn type="submit" text="Register" />
     <FlashMessage :error="error" />
   </form>
 </template>
 
 <script lang="ts">
-import { getError } from "@/utils/helpers";
-import BaseBtn from "@/components/BaseBtn.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import AuthService from "@/services/AuthService";
-import FlashMessage from "@/components/FlashMessage.vue";
-
 export default {
   name: "RegisterForm",
-  components: {
-    BaseBtn,
-    BaseInput,
-    FlashMessage,
-  },
-  data() {
-    return {
-      name: null,
-      email: null,
-      password: null,
-      passwordConfirm: null,
-      error: null,
-    };
-  },
-  methods: {
-    registerUser() {
-      this.error = null;
-      const payload = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        password_confirmation: this.passwordConfirm,
-      };
-      AuthService.registerUser(payload)
-        .then(() => this.$router.push("/dashboard"))
-        .catch((error) => (this.error = getError(error)));
-    },
-  },
 };
+</script>
+
+<script setup lang="ts">
+import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
+
+import BaseBtn from "@/components/main_layout/BaseBtn.vue";
+import BaseInput from "@/components/main_layout/BaseInput.vue";
+import FlashMessage from "@/components/main_layout/FlashMessage.vue";
+
+import { getError } from "@/utils/helpers";
+import AuthService from "@/services/AuthService";
+
+const router = useRouter()
+
+const error = ref(null)
+
+const fields = reactive({
+  name: null,
+  email: null,
+  password: null,
+  passwordConfirm: null,
+})
+
+const registerUser = () => {
+  error.value = null;
+  const payload = {
+    name: fields.name,
+    email: fields.email,
+    password: fields.password,
+    password_confirmation: fields.passwordConfirm,
+  };
+  AuthService.registerUser(payload)
+    .then(() => router.push("/dashboard"))
+    .catch((catchError) => (error.value = getError(catchError)));
+}
 </script>

@@ -34,6 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: "text",
   showLabel: true,
   required: false,
+  value: '',
 })
 const emit = defineEmits(['input'])
 

@@ -25,25 +25,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import FooterMain from '@/components/common/main_layout/Footer.vue'
-import HeaderMain from '@/components/common/main_layout/HeaderScaffold.vue'
+import FooterMain from '@/components/main_layout/Footer.vue'
+import HeaderMain from '@/components/main_layout/HeaderScaffold.vue'
 </script>
-
-<!--
-<script lang="ts">
-import HelloWorld from '@/components/common/HelloWorld.vue';
-import FooterMain from '@/components/common/main_layout/Footer.vue';
-import Header from '@/components/common/main_layout/Header.vue';
-
-@Options({
-  components: {
-    HelloWorld,
-    HeaderMain: Header,
-    FooterMain: Footer,
-  },
-})
-export default class Root extends Vue {}
-</script> -->
 
 <style scoped lang="scss">
 .page-wrapper {

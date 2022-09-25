@@ -4,20 +4,12 @@
       <p v-if="message" class="mt-2 text-sm text-green-500" key="message">
         {{ message }}
       </p>
-      <p
-        v-if="error && getType(error) === 'string'"
-        key="error"
-        class="mt-2 text-sm text-red-500"
-      >
+      <p v-if="error && getType(error) === 'string'" key="error" class="mt-2 text-sm text-red-500">
         {{ error }}
       </p>
-      <ul
-        v-if="getType(error) === 'object'"
-        class="mt-2 text-sm text-red-500"
-        key="error-list"
-      >
+      <ul v-if="getType(error) === 'object'" class="mt-2 text-sm text-red-500" key="error-list">
         <li v-for="key in errorKeys" :key="key">
-          <b class="font-bold capitalize">{{ key | titleCase }}</b>
+          <b class="font-bold capitalize">{{ titleCase(key) }}</b>
           <ul class="ml-2">
             <li v-for="(item, index) in getErrors(key)" :key="`${index}-error`">
               {{ item }}
@@ -30,38 +22,39 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: "FlashMessage",
-  props: {
-    message: {
-      type: String,
-      default: null,
-    },
-    error: {
-      type: [Object, String],
-      default: null,
-    },
-  },
-  computed: {
-    errorKeys() {
-      if (!this.error || this.getType(this.error) === "string") {
+  export default {
+    name: "FlashMessage",
+  };
+  </script>
+
+<script setup lang="ts">
+  import {computed} from 'vue'
+
+interface Props {
+  message?: string | null
+  error?: object | string | null
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  message: null,
+  error: null,
+})
+
+const errorKeys = computed(() => {
+  if (!props.error || getType(props.error) === "string") {
         return null;
       }
-      return Object.keys(this.error);
-    },
-  },
-  methods: {
-    getErrors(key) {
-      return this.error[key];
-    },
-    getType(obj) {
+      return Object.keys(props.error);
+})
+
+const getErrors = (key) => {
+      return props.error && props.error[key];
+    }
+    const getType = (obj) => {
       return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-    },
-  },
-  filters: {
-    titleCase(value) {
-      return value.replace("_", " ");
-    },
-  },
-};
+    }
+
+const titleCase = (value) => {
+  return value.replace("_", " ");
+}
 </script>

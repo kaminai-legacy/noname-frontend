@@ -27,25 +27,6 @@
   </header>
 </template>
 
-<!-- <script>
-import { mapGetters } from "vuex";
-import Logout from "@/components/Logout.vue";
-import HomeIcon from "@/components/common/icons/HomeIcon.vue";
-import LoginIcon from "@/components/common/icons/LoginIcon.vue";
-
-export default {
-  name: "Header",
-  components: {
-    Logout,
-    HomeIcon,
-    LoginIcon,
-  },
-  computed: {
-    ...mapGetters("auth", ["authUser", "isAdmin"]),
-  },
-};
-</script> -->
-
 <script lang="ts">
 export default {
   name: "Header",

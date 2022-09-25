@@ -7,45 +7,6 @@
   </div>
 </template>
 
-<!-- <script>
-import { mapGetters } from "vuex";
-import { getError } from "@/utils/helpers";
-import BaseBtn from "@/components/BaseBtn.vue";
-import AuthService from "@/services/AuthService";
-import FlashMessage from "@/components/FlashMessage.vue";
-
-export default {
-  name: "UpdatePassword",
-  components: {
-    BaseBtn,
-    FlashMessage,
-  },
-  data() {
-    return {
-      error: null,
-      message: null,
-    };
-  },
-  computed: {
-    ...mapGetters("auth", ["authUser"]),
-  },
-  methods: {
-    sendVerification() {
-      this.error = null;
-      this.message = null;
-      const payload = {
-        user: this.authUser.id,
-      };
-      AuthService.sendVerification(payload)
-        .then(() => (this.message = "Verification email sent."))
-        .catch((error) => (this.error = getError(error)));
-    },
-  },
-};
-</script> -->
-
-
-
 <script lang="ts">
 export default {
   name: "UpdatePassword",
@@ -54,12 +15,12 @@ export default {
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 
 import { useAuthStore } from "@/store/auth";
 
-import BaseBtn from "@/components/BaseBtn.vue";
-import FlashMessage from "@/components/FlashMessage.vue";
+import BaseBtn from "@/components/main_layout/BaseBtn.vue";
+import FlashMessage from "@/components/main_layout/FlashMessage.vue";
 
 import AuthService from "@/services/AuthService";
 import { getError } from "@/utils/helpers";
@@ -68,9 +29,9 @@ const store = useAuthStore();
 const { authUser } = storeToRefs(store);
 
 const error = ref(null);
-const message = ref(null);
+const message:Ref<string|null> = ref(null);
 
-sendVerification = () => {
+const sendVerification = () => {
   error.value = null;
   message.value = null;
   const payload = {
@@ -78,6 +39,6 @@ sendVerification = () => {
   };
   AuthService.sendVerification(payload)
     .then(() => (message.value = "Verification email sent."))
-    .catch((error) => (error.value = getError(error)));
+    .catch((catchError) => (error.value = getError(catchError)));
 };
 </script>

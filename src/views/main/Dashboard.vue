@@ -17,23 +17,6 @@
   </div>
 </template>
 
-<!-- <script>
-import { mapGetters } from "vuex";
-import Messages from "@/components/common/Messages.vue";
-import MessageForm from "@/components/common/MessageForm.vue";
-
-export default {
-  name: "Dashboard",
-  components: {
-    Messages,
-    MessageForm,
-  },
-  computed: {
-    ...mapGetters("auth", ["authUser"]),
-  },
-};
-</script> -->
-
 <script lang="ts">
 export default {
   name: "Dashboard",
@@ -45,8 +28,8 @@ import { storeToRefs } from "pinia";
 
 import { useAuthStore } from "@/store/auth";
 
-import Messages from "@/components/common/Messages.vue";
-import MessageForm from "@/components/common/MessageForm.vue";
+import Messages from "@/components/main_layout/Messages.vue";
+import MessageForm from "@/components/main_layout/MessageForm.vue";
 
 const store = useAuthStore();
 const { authUser } = storeToRefs(store);

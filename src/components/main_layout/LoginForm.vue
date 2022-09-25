@@ -26,55 +26,6 @@
   </form>
 </template>
 
-<!-- <script>
-import { getError } from "@/utils/helpers";
-import BaseBtn from "@/components/BaseBtn.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import AuthService from "@/services/AuthService";
-import FlashMessage from "@/components/FlashMessage.vue";
-
-export default {
-  name: "LoginView",
-  components: {
-    BaseBtn,
-    BaseInput,
-    FlashMessage,
-  },
-  data() {
-    return {
-      email: null,
-      password: null,
-      error: null,
-    };
-  },
-  methods: {
-    async login() {
-      const payload = {
-        email: this.email,
-        password: this.password,
-      };
-      this.error = null;
-      try {
-        await AuthService.login(payload);
-        const authUser = await this.$store.dispatch("auth/getAuthUser");
-        if (authUser) {
-          this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
-          this.$router.push("/dashboard");
-        } else {
-          const error = Error(
-            "Unable to fetch user after login, check your API settings."
-          );
-          error.name = "Fetch User";
-          throw error;
-        }
-      } catch (error) {
-        this.error = getError(error);
-      }
-    },
-  },
-};
-</script> -->
-
 <script lang="ts">
 export default {
   name: "LoginView",
@@ -88,11 +39,12 @@ import { useRouter } from "vue-router";
 
 import { useAuthStore } from "@/store/auth";
 
-import BaseBtn from "@/components/BaseBtn.vue";
-import BaseInput from "@/components/BaseInput.vue";
-import FlashMessage from "@/components/FlashMessage.vue";
+import BaseBtn from "@/components/main_layout/BaseBtn.vue";
+import BaseInput from "@/components/main_layout/BaseInput.vue";
+import FlashMessage from "@/components/main_layout/FlashMessage.vue";
 
 import AuthService from "@/services/AuthService";
+import { getError } from "@/utils/helpers";
 
 const router = useRouter();
 const store = useAuthStore();
@@ -102,7 +54,7 @@ const email = ref(null);
 const password = ref(null);
 const error = ref(null);
 
-login = async () => {
+const login = async () => {
   const payload = {
     email: email.value,
     password: password.value,
@@ -121,8 +73,8 @@ login = async () => {
       error.name = "Fetch User";
       throw error;
     }
-  } catch (error) {
-    error.value = getError(error);
+  } catch (catchError) {
+    error.value = getError(catchError);
   }
 };
 </script>
