@@ -1,6 +1,7 @@
 <template>
+  {{fields.name}}
   <form @submit.prevent="registerUser">
-    <BaseInput type="text" label="Name" name="name" v-model="fields.name" placeholder="Luke" class="mb-2" />
+    <BaseInput type="text" label="Name" name="name" :value="fields.name" @input="fields.name = $event" placeholder="Luke" class="mb-2" />
     <BaseInput type="email" label="Email" name="email" v-model="fields.email" placeholder="luke@jedi.com"
       class="mb-2" />
     <BaseInput type="password" label="Password" name="password" v-model="fields.password" class="mb-2" />
@@ -18,7 +19,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
 
 import BaseBtn from "@/components/main_layout/BaseBtn.vue";
@@ -31,16 +32,33 @@ import AuthService from "@/services/AuthService";
 const router = useRouter()
 
 const error = ref(null)
+const some = ref('')
 
-const fields = reactive({
-  name: null,
-  email: null,
-  password: null,
-  passwordConfirm: null,
+interface Fields {
+  name: string|number|undefined
+  email: string|number|undefined
+  password: string|number|undefined
+  passwordConfirm: string|number|undefined
+}
+
+const fields = reactive<Fields>({
+  name: '1111',
+  email: '',
+  password: '',
+  passwordConfirm: '',
 })
+
+const { name, email, password, passwordConfirm } = toRefs(fields)
+
+console.log(fields)
+console.log(Object.keys(fields))
+console.log(Object.values(fields))
+console.log(fields.name)
+console.log(name)
 
 const registerUser = () => {
   error.value = null;
+  fields.name = 2222
   const payload = {
     name: fields.name,
     email: fields.email,

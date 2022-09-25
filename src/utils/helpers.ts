@@ -20,3 +20,13 @@ export const getError = (error) => {
 
   return errorMessage
 }
+
+export const getCookieByName = (name) => {
+  let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  if (match) {
+    return match[2]
+  }
+  else {
+    return null
+  }
+}

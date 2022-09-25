@@ -21,3 +21,12 @@ instance.interceptors.request.use(requestInterceptor, requestInterceptorCatch)
 instance.interceptors.response.use(responseInterceptor, responseInterceptorCatch)
 
 export default instance
+
+export const apiAxios = axios.create({
+  ...config,
+  baseURL: config.baseURL + '/api',
+  withCredentials: true, // required to handle the CSRF token
+})
+
+instance.interceptors.request.use(requestInterceptor, requestInterceptorCatch)
+instance.interceptors.response.use(responseInterceptor, responseInterceptorCatch)

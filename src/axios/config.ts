@@ -1,5 +1,8 @@
 const envs = import.meta.env
-const baseURL = `http${envs.SSL ? 's' : ''}://${envs.VUE_APP_HOST}:${envs.VUE_APP_PORT}`
+const VITE_SSL = typeof envs.VITE_SSL === 'string' ? envs.VITE_SSL.toLocaleLowerCase() === 'true' : envs.VITE_SSL
+
+let baseURL = `http${VITE_SSL ? 's' : ''}://${envs.VITE_APP_HOST}`
+envs.VITE_APP_PORT && `${baseURL}:${envs.VITE_APP_PORT}`
 
 export default {
   baseURL,

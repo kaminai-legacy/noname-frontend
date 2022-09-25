@@ -3,15 +3,12 @@
  * we set the base URL for the API
  */
 
-import axios from 'axios'
+import {apiAxios} from '@/axios'
 
 import pinia from "@/store";
 import { useAuthStore } from '@/store/auth'
 
-export const apiClient = axios.create({
-  baseURL: import.meta.env.VUE_APP_API_URL + '/api',
-  withCredentials: true, // required to handle the CSRF token
-})
+export const apiClient = apiAxios
 
 /*
  * Add a response interceptor
