@@ -8,7 +8,8 @@
       </h1>
       <p class="font-bold">
         The page you're looking for is not here.
-        <router-link to="/dashboard" class="base-link">Back home</router-link>.
+        <router-link to="/dashboard" class="base-link">Back home</router-link>
+        .
       </p>
     </article>
   </div>
@@ -16,6 +17,6 @@
 
 <script lang="ts">
 export default {
-  name: "NotFound",
-};
+  name: 'NotFound',
+}
 </script>

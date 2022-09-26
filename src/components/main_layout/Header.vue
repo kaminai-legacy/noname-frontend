@@ -15,11 +15,7 @@
         <router-link to="/user">{{ authUser.name }}</router-link>
         <Logout />
       </div>
-      <router-link
-        v-else
-        to="/login"
-        class="inline-flex items-center space-x-2"
-      >
+      <router-link v-else to="/login" class="inline-flex items-center space-x-2">
         <span>Login</span>
         <LoginIcon class="w-6 h-6 text-white" />
       </router-link>
@@ -29,19 +25,19 @@
 
 <script lang="ts">
 export default {
-  name: "Header",
-};
+  name: 'Header',
+}
 </script>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
+import { storeToRefs } from 'pinia'
 
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth'
 
-import Logout from "@/components/main_layout/Logout.vue";
-import HomeIcon from "@/components/common/icons/HomeIcon.vue";
-import LoginIcon from "@/components/common/icons/LoginIcon.vue";
+import Logout from '@/components/main_layout/Logout.vue'
+import HomeIcon from '@/components/common/icons/HomeIcon.vue'
+import LoginIcon from '@/components/common/icons/LoginIcon.vue'
 
-const store = useAuthStore();
-const { authUser, isAdmin } = storeToRefs(store);
+const store = useAuthStore()
+const { authUser, isAdmin } = storeToRefs(store)
 </script>

@@ -10,16 +10,16 @@
 
 <script lang="ts">
 export default {
-  name: "BaseBtn",
+  name: 'BaseBtn',
   props: {
     type: {
       type: String,
-      default: "submit",
+      default: 'submit',
     },
     text: {
       type: String,
-      default: "Submit",
+      default: 'Submit',
     },
   },
-};
+}
 </script>

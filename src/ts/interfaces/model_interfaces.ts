@@ -1,5 +1,5 @@
 export interface User {
-  id: string|number
+  id: string | number
   name: string
   email?: string
   avatar?: string
@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface Message {
-  id: string|number
+  id: string | number
   body: string
   user: User
   createdAt: string

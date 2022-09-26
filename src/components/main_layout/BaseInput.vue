@@ -1,19 +1,30 @@
 <template>
   <div>
-    <label :for="name" class="text-sm text-gray-500" :class="{ 'sr-only': !showLabel }" v-if="label">
+    <label
+      :for="name"
+      class="text-sm text-gray-500"
+      :class="{ 'sr-only': !showLabel }"
+      v-if="label"
+    >
       {{ label }}
     </label>
-    <input :id="name" :type="type" :required="required" v-model="value" :placeholder="placeholder"
+    <input
+      :id="name"
+      :type="type"
+      :required="required"
+      v-model="value"
+      :placeholder="placeholder"
       :autocomplete="autocomplete"
-      class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+      class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+    />
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "BaseInput",
+  name: 'BaseInput',
   inheritAttrs: false,
-};
+}
 </script>
 
 <script setup lang="ts">
@@ -31,18 +42,18 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  label: "",
-  type: "text",
+  label: '',
+  type: 'text',
   showLabel: true,
   required: false,
   value: '',
 })
 
-const emit = defineEmits(['update:modelValue'/*, 'input'*/])
+const emit = defineEmits(['update:modelValue' /*, 'input'*/])
 
 const value = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', value),
 })
 
 // const updateValue = (event) => {

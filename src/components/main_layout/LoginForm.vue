@@ -28,32 +28,32 @@
 
 <script lang="ts">
 export default {
-  name: "LoginView",
-};
+  name: 'LoginView',
+}
 </script>
 
 <script setup lang="ts">
-import { ref, Ref, reactive } from "vue";
-import { useRouter } from "vue-router";
+import { ref, Ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth'
 
-import BaseBtn from "@/components/main_layout/BaseBtn.vue";
-import BaseInput from "@/components/main_layout/BaseInput.vue";
-import FlashMessage from "@/components/main_layout/FlashMessage.vue";
+import BaseBtn from '@/components/main_layout/BaseBtn.vue'
+import BaseInput from '@/components/main_layout/BaseInput.vue'
+import FlashMessage from '@/components/main_layout/FlashMessage.vue'
 
-import AuthService from "@/services/AuthService";
-import { getError } from "@/utils/helpers";
+import AuthService from '@/services/AuthService'
+import { getError } from '@/utils/helpers'
 
 interface Fields {
   email: string
   password: string
 }
 
-const router = useRouter();
-const store = useAuthStore();
+const router = useRouter()
+const store = useAuthStore()
 
-const error = ref(null);
+const error = ref(null)
 
 const fields = reactive<Fields>({
   email: '',
@@ -64,25 +64,23 @@ const login = async () => {
   const payload = {
     email: fields.email,
     password: fields.password,
-  };
-  error.value = null;
+  }
+  error.value = null
   try {
-    await AuthService.login(payload);
-    const authUser = await store.getAuthUser();
+    await AuthService.login(payload)
+    const authUser = await store.getAuthUser()
     console.log('authUser')
     console.log(authUser)
     if (authUser) {
-      store.setGuest({ value: "isNotGuest" });
-      router.push("/dashboard");
+      store.setGuest({ value: 'isNotGuest' })
+      router.push('/dashboard')
     } else {
-      const error = Error(
-        "Unable to fetch user after login, check your API settings."
-      );
-      error.name = "Fetch User";
-      throw error;
+      const error = Error('Unable to fetch user after login, check your API settings.')
+      error.name = 'Fetch User'
+      throw error
     }
   } catch (catchError) {
-    error.value = getError(catchError);
+    error.value = getError(catchError)
   }
-};
+}
 </script>

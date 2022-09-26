@@ -10,22 +10,22 @@
 
 <script lang="ts">
 export default {
-  name: "MessageForm",
-};
+  name: 'MessageForm',
+}
 </script>
 
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { ref, Ref } from 'vue'
 
-import { useMessageStore } from "@/store/message";
+import { useMessageStore } from '@/store/message'
 
-import BaseBtn from "@/components/main_layout/BaseBtn.vue";
-import BaseInput from "@/components/main_layout/BaseInput.vue";
-import FlashMessage from "@/components/main_layout/FlashMessage.vue";
+import BaseBtn from '@/components/main_layout/BaseBtn.vue'
+import BaseInput from '@/components/main_layout/BaseInput.vue'
+import FlashMessage from '@/components/main_layout/FlashMessage.vue'
 
-import { getError } from "@/utils/helpers";
+import { getError } from '@/utils/helpers'
 
-const store = useMessageStore();
+const store = useMessageStore()
 
 const body: Ref<string> = ref('')
 const error = ref(null)
@@ -34,12 +34,12 @@ const postMessage = async () => {
   try {
     const payload = {
       body: body.value,
-    };
-    error.value = null;
-    await store.postMessage(payload);
-    body.value = '';
+    }
+    error.value = null
+    await store.postMessage(payload)
+    body.value = ''
   } catch (catchError) {
-    error.value = getError(catchError);
+    error.value = getError(catchError)
   }
 }
 </script>

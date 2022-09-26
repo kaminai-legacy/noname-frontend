@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import pinia from "@/store";
+import pinia from '@/store'
 import { useUserStore } from '@/store/user'
 
-import auth from "@/middleware/auth";
-import admin from "@/middleware/admin";
-import guest from "@/middleware/guest";
+import auth from '@/middleware/auth'
+import admin from '@/middleware/admin'
+import guest from '@/middleware/guest'
 
-import middlewarePipeline from "@/router/middlewarePipeline";
+import middlewarePipeline from '@/router/middlewarePipeline'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,72 +35,67 @@ const routes: Array<RouteRecordRaw> = [
       //   component: () => import('@/views/main/About.vue'),
       // },
       {
-        path: "/",
-        name: "home",
+        path: '/',
+        name: 'home',
         meta: { middleware: [guest] },
-        component: () => import(/* webpackChunkName: "home" */ "@/views/main/Home.vue"),
+        component: () => import(/* webpackChunkName: "home" */ '@/views/main/Home.vue'),
       },
       {
-        path: "/dashboard",
-        name: "dashboard",
+        path: '/dashboard',
+        name: 'dashboard',
         meta: { middleware: [auth] },
-        component: () =>
-          import(/* webpackChunkName: "dashboard" */ "@/views/main/Dashboard.vue"),
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/main/Dashboard.vue'),
       },
       {
-        path: "/user",
-        name: "user",
+        path: '/user',
+        name: 'user',
         meta: { middleware: [auth] },
-        component: () => import(/* webpackChunkName: "user" */ "@/views/main/User.vue"),
+        component: () => import(/* webpackChunkName: "user" */ '@/views/main/User.vue'),
       },
       {
-        path: "/users",
-        name: "users",
+        path: '/users',
+        name: 'users',
         meta: { middleware: [auth, admin] },
-        component: () => import(/* webpackChunkName: "users" */ "@/views/main/Users.vue"),
-        beforeEnter: ((to, from, next) => {
+        component: () => import(/* webpackChunkName: "users" */ '@/views/main/Users.vue'),
+        beforeEnter: (to, from, next) => {
           const store = useUserStore(pinia)
-          const currentPage = parseInt(String(to.query.page)) || 1;
+          const currentPage = parseInt(String(to.query.page)) || 1
           store.getUsers(currentPage).then(() => {
-            to.params.page = String(currentPage);
-            next();
-          });
-        })
+            to.params.page = String(currentPage)
+            next()
+          })
+        },
       },
       {
-        path: "/login",
-        name: "login",
+        path: '/login',
+        name: 'login',
         meta: { middleware: [guest] },
-        component: () => import(/* webpackChunkName: "login" */ "@/views/main/Login.vue"),
+        component: () => import(/* webpackChunkName: "login" */ '@/views/main/Login.vue'),
       },
       {
-        path: "/register",
-        name: "register",
+        path: '/register',
+        name: 'register',
         meta: { middleware: [guest] },
-        component: () =>
-          import(/* webpackChunkName: "register" */ "@/views/main/Register.vue"),
+        component: () => import(/* webpackChunkName: "register" */ '@/views/main/Register.vue'),
       },
       {
-        path: "/reset-password",
-        name: "resetPassword",
-        meta: { middleware: [guest] },
-        component: () =>
-          import(/* webpackChunkName: "reset-password" */ "@/views/main/ResetPassword.vue"),
-      },
-      {
-        path: "/forgot-password",
-        name: "forgotPassword",
+        path: '/reset-password',
+        name: 'resetPassword',
         meta: { middleware: [guest] },
         component: () =>
-          import(
-            /* webpackChunkName: "forgot-password" */ "@/views/main/ForgotPassword.vue"
-          ),
+          import(/* webpackChunkName: "reset-password" */ '@/views/main/ResetPassword.vue'),
       },
       {
-        path: "/:catchAll(.*)",
-        name: "notFound",
+        path: '/forgot-password',
+        name: 'forgotPassword',
+        meta: { middleware: [guest] },
         component: () =>
-          import(/* webpackChunkName: "not-found" */ "@/views/main/NotFound.vue"),
+          import(/* webpackChunkName: "forgot-password" */ '@/views/main/ForgotPassword.vue'),
+      },
+      {
+        path: '/:catchAll(.*)',
+        name: 'notFound',
+        component: () => import(/* webpackChunkName: "not-found" */ '@/views/main/NotFound.vue'),
       },
     ],
   },
@@ -138,17 +133,17 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const middleware = to.meta.middleware;
-  const context = { to, from, next, pinia};
+  const middleware = to.meta.middleware
+  const context = { to, from, next, pinia }
 
   if (!middleware) {
-    return next();
+    return next()
   }
 
   middleware[0]({
     ...context,
     next: middlewarePipeline(context, middleware, 1),
-  });
-});
+  })
+})
 
 export default router

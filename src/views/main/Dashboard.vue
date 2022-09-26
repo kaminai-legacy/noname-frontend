@@ -9,9 +9,7 @@
     <footer class="py-5 text-center">
       <p class="text-gray-400">
         Full documentation for how this application is built can be found at
-        <a href="https://laravelvuespa.com/" class="base-link"
-          >laravelvuespa.com</a
-        >
+        <a href="https://laravelvuespa.com/" class="base-link">laravelvuespa.com</a>
       </p>
     </footer>
   </div>
@@ -19,19 +17,18 @@
 
 <script lang="ts">
 export default {
-  name: "Dashboard",
-};
+  name: 'Dashboard',
+}
 </script>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
+import { storeToRefs } from 'pinia'
 
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth'
 
-import Messages from "@/components/main_layout/Messages.vue";
-import MessageForm from "@/components/main_layout/MessageForm.vue";
+import Messages from '@/components/main_layout/Messages.vue'
+import MessageForm from '@/components/main_layout/MessageForm.vue'
 
-const store = useAuthStore();
-const { authUser } = storeToRefs(store);
+const store = useAuthStore()
+const { authUser } = storeToRefs(store)
 </script>
-

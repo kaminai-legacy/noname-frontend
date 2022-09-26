@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts">
-import RegisterForm from "@/components/main_layout/RegisterForm.vue";
+import RegisterForm from '@/components/main_layout/RegisterForm.vue'
 
 export default {
-  name: "RegisterView",
+  name: 'RegisterView',
   components: {
     RegisterForm,
   },
-};
+}
 </script>

@@ -22,13 +22,13 @@
 </template>
 
 <script lang="ts">
-  export default {
-    name: "FlashMessage",
-  };
-  </script>
+export default {
+  name: 'FlashMessage',
+}
+</script>
 
 <script setup lang="ts">
-  import {computed} from 'vue'
+import { computed } from 'vue'
 
 interface Props {
   message?: string | null
@@ -41,20 +41,20 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const errorKeys = computed(() => {
-  if (!props.error || getType(props.error) === "string") {
-        return null;
-      }
-      return Object.keys(props.error);
+  if (!props.error || getType(props.error) === 'string') {
+    return null
+  }
+  return Object.keys(props.error)
 })
 
 const getErrors = (key) => {
-      return props.error && props.error[key];
-    }
-    const getType = (obj) => {
-      return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-    }
+  return props.error && props.error[key]
+}
+const getType = (obj) => {
+  return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
+}
 
 const titleCase = (value) => {
-  return value.replace("_", " ");
+  return value.replace('_', ' ')
 }
 </script>

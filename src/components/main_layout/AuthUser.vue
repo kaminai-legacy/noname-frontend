@@ -11,9 +11,7 @@
     <ul>
       <li class="mb-1 font-bold">{{ authUser.name }}</li>
       <li>Email: {{ authUser.email }}</li>
-      <li v-if="authUser.emailVerified" class="text-gray-500">
-        Emailed Verified
-      </li>
+      <li v-if="authUser.emailVerified" class="text-gray-500">Emailed Verified</li>
     </ul>
     <VerifyEmail v-if="!authUser.emailVerified" class="mt-4" />
   </div>
@@ -21,18 +19,17 @@
 
 <script lang="ts">
 export default {
-  name: "AuthUser",
-};
+  name: 'AuthUser',
+}
 </script>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
+import { storeToRefs } from 'pinia'
 
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth'
 
-import VerifyEmail from "@/components/main_layout/VerifyEmail.vue";
+import VerifyEmail from '@/components/main_layout/VerifyEmail.vue'
 
-const store = useAuthStore();
-const { authUser } = storeToRefs(store);
-
+const store = useAuthStore()
+const { authUser } = storeToRefs(store)
 </script>

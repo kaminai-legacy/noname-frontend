@@ -8,7 +8,7 @@ import VueAxios from 'vue-axios'
 import axios from '@/axios'
 import FontAwesomeIcon from '@/components/font_awesome'
 import router from '@/router'
-import store from "@/store";
+import store from '@/store'
 
 import App from './App.vue'
 

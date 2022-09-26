@@ -3,9 +3,9 @@
  * we set the base URL for the API
  */
 
-import {apiAxios} from '@/axios'
+import { apiAxios } from '@/axios'
 
-import pinia from "@/store";
+import pinia from '@/store'
 import { useAuthStore } from '@/store/auth'
 
 export const apiClient = apiAxios

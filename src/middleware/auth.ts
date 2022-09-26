@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth'
 
 export default function auth({ to, next, pinia }) {
   const store = useAuthStore(pinia)

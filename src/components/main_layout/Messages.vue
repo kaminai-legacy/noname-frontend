@@ -5,7 +5,12 @@
       <ul v-else>
         <li v-for="message in messages" :key="message.id" class="flex py-2 space-x-2 border-b">
           <div>
-            <img v-if="message.user.avatar" :src="message.user.avatar" class="w-10 h-10 rounded-full" alt="" />
+            <img
+              v-if="message.user.avatar"
+              :src="message.user.avatar"
+              class="w-10 h-10 rounded-full"
+              alt=""
+            />
             <AvatarIcon class="w-10 h-10 text-gray-400 rounded-full" v-else />
           </div>
           <div>
@@ -22,30 +27,35 @@
       <FlashMessage :error="error" v-if="error" key="error" />
     </transition>
     <transition name="fade">
-      <BasePagination :meta="meta" :links="links" :store="store" action="paginateMessages"
-        v-if="meta && parseInt(meta.last_page) > 1" />
+      <BasePagination
+        :meta="meta"
+        :links="links"
+        :store="store"
+        action="paginateMessages"
+        v-if="meta && parseInt(meta.last_page) > 1"
+      />
     </transition>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "Messages",
-};
+  name: 'Messages',
+}
 </script>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
+import { storeToRefs } from 'pinia'
 
-import { useMessageStore } from "@/store/message";
+import { useMessageStore } from '@/store/message'
 
-import FlashMessage from "@/components/main_layout/FlashMessage.vue";
-import AvatarIcon from "@/components/common/icons/AvatarIcon.vue";
-import BasePagination from "@/components/main_layout/BasePagination.vue";
+import FlashMessage from '@/components/main_layout/FlashMessage.vue'
+import AvatarIcon from '@/components/common/icons/AvatarIcon.vue'
+import BasePagination from '@/components/main_layout/BasePagination.vue'
 
-const store = useMessageStore();
-const { messages, meta, links, loading, error } = storeToRefs(store);
+const store = useMessageStore()
+const { messages, meta, links, loading, error } = storeToRefs(store)
 
-const currentPage = 1;
-store.getMessages(currentPage);
+const currentPage = 1
+store.getMessages(currentPage)
 </script>

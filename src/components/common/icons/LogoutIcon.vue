@@ -15,6 +15,6 @@
 
 <script lang="ts">
 export default {
-  name: "LogoutIcon",
-};
+  name: 'LogoutIcon',
+}
 </script>

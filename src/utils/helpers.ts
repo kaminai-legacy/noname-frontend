@@ -22,11 +22,10 @@ export const getError = (error) => {
 }
 
 export const getCookieByName = (name) => {
-  let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
   if (match) {
     return match[2]
-  }
-  else {
+  } else {
     return null
   }
 }

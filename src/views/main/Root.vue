@@ -9,7 +9,7 @@
         <router-link to="/vue-example">Vue-Example</router-link>
         |
         <router-link to="/admin">Admin</router-link>
-        <HeaderSPA/>
+        <HeaderSPA />
       </nav>
     </header-main>
     <main>
