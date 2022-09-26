@@ -4,7 +4,7 @@
       type="email"
       label="Email"
       name="email"
-      v-model="email"
+      v-model="fields.email"
       autocomplete="email"
       placeholder="luke@jedi.com"
       class="mb-2"
@@ -13,7 +13,7 @@
       type="password"
       label="Password"
       name="password"
-      v-model="password"
+      v-model="fields.password"
       class="mb-4"
     />
     <div class="flex justify-between">
@@ -33,8 +33,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, Ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 import { useAuthStore } from "@/store/auth";
@@ -46,23 +45,32 @@ import FlashMessage from "@/components/main_layout/FlashMessage.vue";
 import AuthService from "@/services/AuthService";
 import { getError } from "@/utils/helpers";
 
+interface Fields {
+  email: string
+  password: string
+}
+
 const router = useRouter();
 const store = useAuthStore();
-const { authUser } = storeToRefs(store);
 
-const email = ref(null);
-const password = ref(null);
 const error = ref(null);
+
+const fields = reactive<Fields>({
+  email: '',
+  password: '',
+})
 
 const login = async () => {
   const payload = {
-    email: email.value,
-    password: password.value,
+    email: fields.email,
+    password: fields.password,
   };
   error.value = null;
   try {
     await AuthService.login(payload);
     const authUser = await store.getAuthUser();
+    console.log('authUser')
+    console.log(authUser)
     if (authUser) {
       store.setGuest({ value: "isNotGuest" });
       router.push("/dashboard");

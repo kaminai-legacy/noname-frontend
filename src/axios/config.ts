@@ -8,5 +8,6 @@ export default {
   baseURL,
   Headers: {
     'X-Requested-With': 'XMLHttpRequest',
+    'Accept' : 'application/json',
   },
 }

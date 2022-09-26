@@ -15,7 +15,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 
 import { useMessageStore } from "@/store/message";
 
@@ -27,7 +27,7 @@ import { getError } from "@/utils/helpers";
 
 const store = useMessageStore();
 
-const body = ref(null)
+const body: Ref<string> = ref('')
 const error = ref(null)
 
 const postMessage = async () => {
@@ -37,7 +37,7 @@ const postMessage = async () => {
     };
     error.value = null;
     await store.postMessage(payload);
-    body.value = null;
+    body.value = '';
   } catch (catchError) {
     error.value = getError(catchError);
   }

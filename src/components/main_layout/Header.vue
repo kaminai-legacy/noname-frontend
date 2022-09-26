@@ -38,7 +38,7 @@ import { storeToRefs } from "pinia";
 
 import { useAuthStore } from "@/store/auth";
 
-import Logout from "@/components/Logout.vue";
+import Logout from "@/components/main_layout/Logout.vue";
 import HomeIcon from "@/components/common/icons/HomeIcon.vue";
 import LoginIcon from "@/components/common/icons/LoginIcon.vue";
 

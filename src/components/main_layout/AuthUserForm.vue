@@ -4,14 +4,14 @@
       type="text"
       label="Name"
       name="name"
-      v-model="name"
+      v-model="fields.name"
       class="mb-2"
     />
     <BaseInput
       type="email"
       label="Email"
       name="email"
-      v-model="email"
+      v-model="fields.email"
       autocomplete="email"
       placeholder="luke@jedi.com"
       class="mb-4"
@@ -29,7 +29,7 @@ export default {
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { ref, onMounted } from "vue";
+import { ref, onMounted,reactive } from "vue";
 
 import { useAuthStore } from "@/store/auth";
 
@@ -40,20 +40,28 @@ import FlashMessage from "@/components/main_layout/FlashMessage.vue";
 import AuthService from "@/services/AuthService";
 import { getError } from "@/utils/helpers";
 
+interface Fields {
+  name: string
+  email: string
+}
+
 const store = useAuthStore();
 const { authUser } = storeToRefs(store);
 
-const name = ref(null);
-const email = ref(null);
 const error = ref(null);
 const message:any = ref(null);
+
+const fields = reactive<Fields>({
+  name: '',
+  email: '',
+})
 
 const updateUser = () => {
   error.value = null;
   message.value = null;
   const payload = {
-    name: name.value,
-    email: email.value,
+    name: fields.name,
+    email: fields.email,
   };
   AuthService.updateUser(payload)
     .then(() => store.getAuthUser())
@@ -62,7 +70,7 @@ const updateUser = () => {
 };
 
 onMounted(() => {
-  name.value = authUser.value.name;
-  email.value = authUser.value.email;
+  fields.name = authUser.value.name;
+  fields.email = authUser.value.email;
 });
 </script>

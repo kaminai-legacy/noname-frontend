@@ -9,6 +9,7 @@
         <router-link to="/vue-example">Vue-Example</router-link>
         |
         <router-link to="/admin">Admin</router-link>
+        <HeaderSPA/>
       </nav>
     </header-main>
     <main>
@@ -27,6 +28,7 @@ export default {
 <script setup lang="ts">
 import FooterMain from '@/components/main_layout/Footer.vue'
 import HeaderMain from '@/components/main_layout/HeaderScaffold.vue'
+import HeaderSPA from '@/components/main_layout/Header.vue'
 </script>
 
 <style scoped lang="scss">

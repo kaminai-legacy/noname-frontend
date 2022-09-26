@@ -28,5 +28,5 @@ export const apiAxios = axios.create({
   withCredentials: true, // required to handle the CSRF token
 })
 
-instance.interceptors.request.use(requestInterceptor, requestInterceptorCatch)
-instance.interceptors.response.use(responseInterceptor, responseInterceptorCatch)
+apiAxios.interceptors.request.use(requestInterceptor, requestInterceptorCatch)
+apiAxios.interceptors.response.use(responseInterceptor, responseInterceptorCatch)

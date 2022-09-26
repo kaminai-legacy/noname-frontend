@@ -27,7 +27,7 @@ import { getError } from "@/utils/helpers";
 import AuthService from "@/services/AuthService";
 
 const error = ref(null)
-const email = ref(null)
+const email: Ref<string | number> = ref('')
 const message: Ref<string | null> = ref(null)
 
 const fields = reactive({
