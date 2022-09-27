@@ -1,6 +1,5 @@
 import './bootstrap'
 import '@/assets/css/app.css'
-// import '@/assets/scss/global.scss'
 
 import { createApp } from 'vue'
 import VueAxios from 'vue-axios'
